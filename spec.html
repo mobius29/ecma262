@@ -49852,7 +49852,7 @@ THH:mm:ss.sss
         <h1>
           GeneratorYield (
             _iteratorResult_: an Object that conforms to the IteratorResult interface,
-          ): either a normal completion containing an ECMAScript language value or an abrupt completion
+          ): either a normal completion containing either an ECMAScript language value or ~empty~, or an abrupt completion
         </h1>
         <dl class="header">
           <dt>skip return checks</dt>
@@ -49883,7 +49883,9 @@ THH:mm:ss.sss
         <emu-alg>
           1. Let _generatorKind_ be GetGeneratorKind().
           1. If _generatorKind_ is ~async~, return ? AsyncGeneratorYield(? Await(_value_)).
-          1. Otherwise, return ? GeneratorYield(CreateIteratorResultObject(_value_, *false*)).
+          1. Otherwise, let _result_ be ? GeneratorYield(CreateIteratorResultObject(_value_, *false*)).
+          1. Assert: _result_ is not ~empty~.
+          1. Return _result_.
         </emu-alg>
       </emu-clause>
 
